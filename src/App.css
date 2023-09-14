@@ -1,38 +1,77 @@
-.App {
-  text-align: center;
+body{
+  background-color: rgba(247, 243, 223, 0.795);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+nav {
+  background-color: rgb(243, 238, 212);
+  padding: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.NavBar {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.NavTitle {
+  font-size: 25px;
+  margin-right: 10px;
+  font-family:'Lucida Console';
+  color: #535353;
+  text-decoration: none;
+}
+
+.NavBarOptions {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.NavBarOptionsButton{
+  margin-right: 100px;
+  padding: 8px 16px;
+  color: #535353c5;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 15px;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.NavBarOptionsButton:hover{
+  text-decoration: underline;
+}
+
+.NavBarOptionsButtonActive{
+  margin-right: 100px;
+  padding: 8px 16px;
+  color: #1d1d1d;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 15px;
+  text-decoration: underline;
+}
+
+.searchIcon{
+  max-width: 100%;
+  width: 35px;
+  height: 35px;
+}
+
+.searchIcon:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.cartIcon{
+  max-width: 100%;
+  width: 35px;
+  height: 35px;
+}
+
+.cartIcon:hover{
+  transform: scale(1.1);
+  cursor: pointer;
 }
