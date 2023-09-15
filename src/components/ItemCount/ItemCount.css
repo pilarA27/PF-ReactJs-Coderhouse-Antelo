@@ -25,7 +25,7 @@
     background-color: #dddbdb;
 }
 
-.CartButton{
+.CardButton{
     width: 60%;
     padding: 10px;
     background-color: #f7f2f2;
@@ -38,7 +38,7 @@
     margin-left: 20%;
 }
 
-.CartButton:hover {
+.CardButton:hover {
     text-decoration: none;
     background-color: #dddbdb;
 }
