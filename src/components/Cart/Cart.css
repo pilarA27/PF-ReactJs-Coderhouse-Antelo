@@ -6,14 +6,11 @@
     margin: 0 auto;
 }
 
-.CartOptions section{
-    margin: 0 -750px;
-}
-
 .CartButton{
     display: block;
-    width: 100%;
-    padding: 20px 15px;
+    width: 30%;
+    padding: 20px 10px;
+    margin: 5px;
     background-color: #e6e6e6;
     color: rgba(51, 51, 51, 0.795);
     border: none;
@@ -21,6 +18,24 @@
     cursor: pointer;
     text-decoration: none;
     font-size: 20px;
+}
+
+.CartRemove{
+    width: 10%;
+    padding: 20px 10px;
+    margin: 5px;
+    background-color: #e6e6e6;
+    color: rgba(51, 51, 51, 0.795);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.CartRemove:hover{
+    text-decoration: none;
+    background-color: #cecece;
 }
 
 .CartButton:hover {
@@ -33,4 +48,11 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 30px;
     color: #353535c0;
+}
+
+.CartInfo{
+    color: #353535c0;
+    font-size: 20px;
+    margin-left: 25px ;
+
 }

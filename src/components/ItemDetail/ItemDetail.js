@@ -1,55 +1,47 @@
+import { useContext, useState } from "react";
+import ItemCount from "../ItemCount/ItemCount";
+import { Link } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 import './ItemDetail.css'
-import ItemCount from '../ItemCount/ItemCount'
-import { useState, useContext } from 'react'
-import { CartContext } from '../../context/CartContext'
 
-const ItemDetail = ({ id, name, img, category, description, price, stock}) => {
-    const[quantityAdded, SetQuantityAdded] = useState(0)
-    const { addItem } = useContext(CartContext);
+const ItemDetail = ({ id, name, url, category, description, price, stock }) => {
+  const [cantidadAgregada, setCantidadAgregada] = useState(0);
 
-    const handleOnAdd= (quantity) => {
-        SetQuantityAdded(quantity)
+  const { addItem } = useContext(CartContext);
 
-        const item = {
-            id, name, price
-        }
+  const handleOnAdd = (cantidad) => {
+    setCantidadAgregada(cantidad);
 
-        addItem(item, quantity)
-    }
+    const item = {
+      id,
+      name,
+      price,
+    };
 
-    console.log("quantityAdded:", quantityAdded);
-    return (
-        <article>
-            <div className="CardDivDetail">
-            <article className='CardDetail'>
-            <picture>
-                <img src={img} alt={name} className="CardImgDetail"/>
+    addItem(item, cantidad);
+  };
+
+  return (
+    <div className="CardDivDetail">
+        <article className="CardDetail">
+            <picture className="flex justify-center">
+                <img src={url} className="CardImgDetail" alt={name} />
             </picture>
             <header className="CardHeaderDetail">
-                <h2 className="CardHeaderItemDetail">
+                <h3 className="CardHeaderItemDetail">
                     {name}
-                </h2>
+                </h3>
             </header>
             <section>
-                <p className="CardInfoDetail">
-                    {description}
-                </p>
-                <p className="CardInfoDetail">
-                    Precio: ${price}
-                </p>
-                <p className="CardInfoDetail">
-                    Available Stock: {stock}
-                </p>
+                <p className="CardInfoDetail">{description}</p>
+                <p className="CardInfoDetail">Price: ${price}</p>
             </section>
             <footer className="CardFooterDetail">
-                {
-                 <ItemCount initial={1} stock={stock} onAdd={handleOnAdd}/>
-                }
+                {<ItemCount initial={1} stock={stock} onAdd={handleOnAdd} />}
             </footer>
         </article>
-        </div>
-        </article>
-    )
-}
+      </div>
+  );
+};
 
-export default ItemDetail
+export default ItemDetail;

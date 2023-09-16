@@ -1,39 +1,45 @@
-import './ItemDetailContainer.css'
-import { useState, useEffect } from 'react'
-import ItemDetail from '../ItemDetail/ItemDetail'
-import { useParams } from 'react-router-dom'
-import { getDoc, doc } from 'firebase/firestore'
-import { db } from '../../firebase-config'
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getDocs, collection, query, where } from "firebase/firestore";
+import { db } from "../../firebase-config";
+import ItemDetail from "../ItemDetail/ItemDetail";
+
 
 const ItemDetailContainer = () => {
-    const[product, setproduct] = useState(null)
-    const[loading, setLoading] = useState(true)
+  const [product, setProduct] = useState(null);
+  const { itemId } = useParams();
 
-    const{itemId} = useParams()
+  useEffect(() => {
+    const collectionRef = collection(db, "Items");
+    const filteredCollectionRef = query(
+      collectionRef,
+      where("id", "==", itemId)
+    );
 
-    useEffect(() => {
-        setLoading(true)
-        const docRef = doc(db, 'products', itemId)
+    getDocs(filteredCollectionRef)
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          const doc = querySnapshot.docs[0];
+          const data = doc.data();
+          const productAdapted = { id: doc.id, ...data };
+          setTimeout(() => {
+            setProduct(productAdapted);
+          }, 1000);
+        } else {
+          console.log("Product isn't available");
+          setProduct(null);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [itemId]);
 
-        getDoc(docRef)
-            .then(response => {
-                const data = response.data()
-                const productAdapted = {id: response.id, ...data}
-                setproduct(productAdapted)
-            })
-        .catch(error => {
-            console.error(error)
-        })
-        .finally(() => {
-            setLoading(false)
-        })
-    }, [itemId])
+  return (
+    <div>
+        <ItemDetail {...product} />
+    </div>
+  );
+};
 
-    return(
-        <div className='ItemDetailContainer'>
-            <ItemDetail {...product}/>
-        </div>
-    )
-}
-
-export default ItemDetailContainer
+export default ItemDetailContainer;

@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import CartWidget from "../CartWidget/CartWidget";
 import searchIcon from "../NavBar/img/searchIcon.svg";
+import '../../App.css'
 
 const NavBar = () => {
   return (

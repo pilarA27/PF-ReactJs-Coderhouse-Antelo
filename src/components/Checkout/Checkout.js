@@ -7,7 +7,7 @@ const Checkout = () =>{
         <div className='Checkout'>
             <img src={check} alt='Check Icon' className='CheckImg' />
             <h2 className='CheckText'>Your order was successful and is ready for pickup.</h2>
-            <p>Thanks for trusting us!!</p>
+            <p className='CheckLittleText'>Thanks for trusting us!!</p>
         </div>
     )
 }

@@ -1,45 +1,58 @@
-import { useState, useEffect } from "react"
-import ItemList from "../ItemList/ItemList.js";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getDocs, collection, query, where } from "firebase/firestore";
-import { db } from "../../firebase-config.js";
+import { db } from "../../firebase-config";
+import ItemList from "../ItemList/ItemList";
+import '../../App.css'
 
+const ItemListContainer = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { categoryId } = useParams();
 
-const ItemListContainer = ({ greeting }) => {
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    setLoading(true);
 
-    const {categoryId} = useParams()
+    const collectionRef = collection(db, "Items");
+    let filteredCollectionRef;
 
-    useEffect(() => {
-        setLoading(true)
-        const collectionRef = categoryId
-            ? query(collection(db, 'products'), where ('category', '==', categoryId))
-            : collection(db, 'products')
+    if (categoryId) {
+      filteredCollectionRef = query(
+        collectionRef,
+        where("category", "==", categoryId)
+      );
+    } else {
+      filteredCollectionRef = collectionRef;
+    }
 
-        getDocs(collectionRef)
-            .then(response => {
-                const productsAdapted = response.docs.map(doc => {
-                    const data = doc.data()
-                    return{id: doc.id, ...data}
-                })
-                setProducts(productsAdapted)
-            })
+    getDocs(filteredCollectionRef)
+      .then((response) => {
+        const productAdapted = response.docs.map((doc) => {
+          const data = doc.data();
+          return { id: doc.id, ...data };
+        });
+        setProducts(productAdapted);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [categoryId]);
 
-        .catch(error => {
-            console.error(error)
-        })
-        .finally(() => {
-            setLoading(false)
-        })
-    }, [categoryId])
+  return (
+    <div className="bg-green-400 mx-auto px-4 py-8">
+      <h1 className="BodyTitle">
+        {categoryId ? `Category: ${categoryId}` : "All Products"}
+      </h1>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <ItemList products={products} />
+      )}
+    </div>
+  );
+};
 
-    return (
-        <div>
-            <h1>{greeting}</h1>
-            <ItemList products={products}/>
-        </div>
-    )
-}
-
-export default ItemListContainer
+export default ItemListContainer;
