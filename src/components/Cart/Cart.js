@@ -19,7 +19,7 @@ const Cart = () => {
         <div>
           <div className="CartInfo">
             {cart.map((p) => (
-              <CardItem key={p.id} {...p} />
+              p ? <CardItem key={p.id} {...p} /> : null
             ))}
           </div>
           <h3 className="CartTotal">Total: ${calculateTotal()}</h3>

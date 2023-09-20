@@ -6,7 +6,7 @@ import './ItemDetail.css'
 
 const ItemDetail = ({ id, name, url, category, description, price, stock }) => {
   const [cantidadAgregada, setCantidadAgregada] = useState(0);
-
+  const [showProductAddedMessage, setShowProductAddedMessage] = useState(false); // Nuevo estado para controlar el mensaje
   const { addItem } = useContext(CartContext);
 
   const handleOnAdd = (cantidad) => {
@@ -19,6 +19,10 @@ const ItemDetail = ({ id, name, url, category, description, price, stock }) => {
     };
 
     addItem(item, cantidad);
+    setShowProductAddedMessage(true);
+    setTimeout(() => {
+      setShowProductAddedMessage(false);
+    }, 2300);
   };
 
   return (
@@ -39,6 +43,9 @@ const ItemDetail = ({ id, name, url, category, description, price, stock }) => {
             <footer className="CardFooterDetail">
                 {<ItemCount initial={1} stock={stock} onAdd={handleOnAdd} />}
             </footer>
+            {showProductAddedMessage && (
+        <p className="ProductAdded">Product succesfully added</p>
+        )}
         </article>
       </div>
   );

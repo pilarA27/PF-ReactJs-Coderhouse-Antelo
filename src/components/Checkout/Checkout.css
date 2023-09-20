@@ -18,3 +18,55 @@
 .CheckLittleText{
     font-size: 30px;
 }
+
+.FormContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 120px;
+}
+
+.FormLabel{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.FormInput{
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.FormText{
+    margin: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #353535c0;
+}
+
+.FormButton{
+    width: 150px;
+    height: 50px;
+    font-size: 20px;
+    background-color: #bbbbbb;
+    color: rgba(51, 51, 51, 0.795);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.FormButton:hover{
+    background-color: rgb(121, 121, 121);
+    background-color: #d6d6d6;
+}
